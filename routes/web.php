@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+// Admin grup rotası
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
-        return view('admin.index')->name('admin_index');
-    });
+        return view('admin.index'); // Admin ana sayfası için view döndürüldü
+    })->name('admin_index'); // Route'a admin_index adı verildi
 });
 
+// Anasayfa rotası
 Route::get('/', function () {
-    return view('front.index');
-})->name('index');
+    return view('front.index'); // Ana sayfa için view döndürüldü
+})->name('index'); // Route'a index adı verildi

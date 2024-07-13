@@ -1,7 +1,4 @@
-@extends('front.layout.app')
+@extends('admin.layout.app')
 @section('content')
 
-    <div class="container">
-        <h1>Ürünler</h1>
-    </div>
 @endsection
