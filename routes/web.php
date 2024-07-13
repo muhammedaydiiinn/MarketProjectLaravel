@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
+use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,18 +25,13 @@ Route::post('/logout', [AuthManager::class, 'logout'])->name('logout');
 Route::get('/register', [AuthManager::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthManager::class, 'register']);
 
-// Genel ürün listesi
-Route::get('/', function () {
-    // Tüm ürünleri listele
-})->name('index');
+Route::get('/', [ProductController::class, 'index'])->name('index');
 
 // Admin paneli rotaları (auth middleware ile korunuyor)
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::get('/', function () {
-        // Admin panelini göster
-    })->name('admin.dashboard');
-
-    Route::get('/products', function () {
-        // Admin panelinde ürünleri listele
-    })->name('admin.products');
+    // Admin paneli ana sayfa
+    Route::get('/', [ProductController::class, 'admin'])->name('admin.dashboard');
 });
+
+// Kategoriye göre ürün listesi rotası
+Route::get('/category/{slug}', [ProductCategoryController::class, 'show'])->name('category.products');
